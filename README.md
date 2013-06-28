@@ -8,4 +8,5 @@ LiBRE! _Lucene_ - Moduli
 
 
 
-Broj 14. LiBRE! časopisa (https://libre.lugons.org) uskoro izlazi i implentiramo klasu _"TikaEkstrakcija"_.
+Broj 14. LiBRE! časopisa (https://libre.lugons.org) uskoro izlazi i implentiramo klasu _„RawDokumenta”_, i polako 
+se spremamo za implementaciju klase _"TikaEkstrakcija"_, koju ćemo predstaviti u broju 15. LiBRE! časopisa.
