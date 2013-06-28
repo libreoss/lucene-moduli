@@ -1,4 +1,4 @@
-Libre Lucene - Moduli
+LiBRE! _Lucene_ - Moduli
 ===================
 ##### Implementacija modula i delovi koda iz LiBRE! Časopisa.
 
