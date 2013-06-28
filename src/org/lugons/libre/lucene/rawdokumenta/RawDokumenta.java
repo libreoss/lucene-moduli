@@ -34,7 +34,7 @@ public class RawDokumenta {
 				// System.out.println("Nađen fajl: " + file.getName());
 				getListaFajlova().add(file);
 			} else {
-				// System.out.println("Presko�?eno " + filename);
+				// System.out.println("Preskočeno " + filename);
 			}
 		}
  
