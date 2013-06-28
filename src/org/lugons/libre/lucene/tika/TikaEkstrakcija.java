@@ -57,7 +57,7 @@ public class TikaEkstrakcija {
 		System.out.println("");
 		TikaEkstrakcija tikaExt = new TikaEkstrakcija();
 		for (File file : raw.getListaFajlova()) {
-			System.out.println("Nađen fajl: " + file.getName());
+			System.out.println("Nađen fajl/ovi: " + file.getName());
 			tikaExt.tikaEkstrakt(file.getAbsolutePath());
 		}
 
