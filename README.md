@@ -4,7 +4,7 @@ LiBRE! _Lucene_ - Moduli
 
  
  
-![Libre_Lucene-Moduli](https://secure.gravatar.com/avatar/eb5a8a0746401cc4fa761b58fe67d5ba?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png "Logo Title Text 1")
+![Libre_Lucene-Moduli](https://www.dropbox.com/s/x61fwtd394kdmm8/LiBRE-Lucene-application-LOGO_.png "Logo Title Text 1")
 
 
 
