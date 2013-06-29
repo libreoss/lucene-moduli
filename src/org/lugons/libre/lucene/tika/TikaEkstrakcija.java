@@ -2,56 +2,133 @@ package org.lugons.libre.lucene.tika;
 
 import org.lugons.libre.lucene.rawdokumenta.RawDokumenta;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.tika.io.IOUtils;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
 
 import org.xml.sax.ContentHandler;
 
-public class TikaEkstrakcija {
+public class TikaEkstrakcija implements Runnable {
 
-	public void tikaEkstrakt(String datoteka) throws IOException {
+	
+	private static RawDokumenta raw;
+	private String text;
+	private Map<String, String> metaData;
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Map<String, String> getMetaData() {
+		return metaData;
+	}
+
+	public void setMetaData(Map<String, String> metaData) {
+		this.metaData = metaData;
+	}
+
+	
+
+	private void processMetaData(Metadata metadata) {
+		if ((getMetaData() == null) || (!getMetaData().isEmpty())) {
+			setMetaData(new HashMap<String, String>());
+		}
+		for (String name : metadata.names()) {
+			getMetaData().put(name.toLowerCase(), metadata.get(name));
+
+		}
+
+	}
+
+	@Override
+	public void run() {
+		try {
+			for (int i = 0; i < raw.getListaFajlova().size(); i++) {
+
+				pdfParsiranje(raw.getListaFajlova().get(i).getAbsolutePath());
+				System.out.println("Nađeni fajl-ovi: "
+						+ raw.getListaFajlova().get(i).getName());
+				
+				
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void pdfParsiranje(String putanja) throws IOException {
 
 		InputStream is = null;
 		ContentHandler nosacSadrzaja;
-		Metadata metadata;
-		PDFParser pdfParser;
+		Metadata md;
+		AutoDetectParser parser;
 
 		try {
+			metaData = new HashMap<String, String>();
+			md = new Metadata();
 
-			is = new FileInputStream(datoteka);
-			nosacSadrzaja = new BodyContentHandler();
-			metadata = new Metadata();
-			pdfParser = new PDFParser();
-			pdfParser.parse(is, nosacSadrzaja, metadata, new ParseContext());
+			is = new FileInputStream(putanja);
+			nosacSadrzaja = new BodyContentHandler(-1);
 
+			parser = new AutoDetectParser();
+			parser.parse(is, nosacSadrzaja, md, new ParseContext());
+			processMetaData(md);
+			sviMetapodaci(getMetaData());
 			System.out.println(nosacSadrzaja.toString());
-			sviMetapodaci(metadata);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (is != null)
-				is.close();
+				IOUtils.closeQuietly(is);
 		}
 	}
 
-	public void sviMetapodaci(Metadata metadata) {
-		for (int i = 0; i < metadata.names().length; i++) {
-			String name = metadata.names()[i];
-			System.out.println(name + " : " + metadata.get(name));
+	public void sviMetapodaci(Map<String, String> map) {
+		for (Object key : map.keySet()) {
+			System.out.println("Key : " + key.toString() + " Value : "
+					+ map.get(key));
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
+	// Upisujem parsiran PDF u tekstualni fajl
+	// TODO uraditi ovu metodu
+	void writeTexttoFile(String pdfText, String fileName) {
+
+		System.out.println("\nUpisujem parsiran PDF u tekstualni fajl "
+				+ fileName + "....");
+		try {
+			PrintWriter pw = new PrintWriter(fileName);
+			pw.print(pdfText);
+			pw.close();
+		} catch (Exception e) {
+			System.out
+					.println("An exception occured in writing the pdf text to file.");
+			e.printStackTrace();
+		}
+		System.out.println("Gotovo.");
+	}
+
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
+		TikaEkstrakcija ttt = new TikaEkstrakcija();
 		System.out.println("Unesite putanju do direktorijuma ili fajla:"
 				+ " (npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String unosKorisnika = br.readLine();
-		RawDokumenta raw = new RawDokumenta(unosKorisnika);
-		TikaEkstrakcija tikaExt = new TikaEkstrakcija();
-
+		raw = new RawDokumenta(unosKorisnika);
 		System.out.println("Pronađeni fajlovi:  " + raw.getListaFajlova());
 		System.out.println("============================================");
 		System.out.println("||           TIKA EKSTRAKCIJA             ||");
@@ -60,11 +137,22 @@ public class TikaEkstrakcija {
 		System.out.println("============================================");
 		System.out.println("||               METAPODACI               ||");
 		System.out.println("============================================");
+		
+		// tikaExt.run();
 
-		for (File file : raw.getListaFajlova()) {
-			System.out.println("Nađeni fajl-ovi: " + file.getName());
-			tikaExt.tikaEkstrakt(file.getAbsolutePath());
+		Thread tre = new Thread(new TikaEkstrakcija());
+		tre.start();
+		while (tre.isAlive()) {
+
+			System.out.println("Ekstraktujem ....");
+			
+			// Wait maximum of 1 second
+			// for MessageLoop thread
+			// to finish.
+			tre.join(4000);
 		}
+
+		System.out.println("GOOOOTOVO");
 
 	}
 
