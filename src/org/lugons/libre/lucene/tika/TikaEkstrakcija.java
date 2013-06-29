@@ -114,8 +114,7 @@ public class TikaEkstrakcija implements Runnable {
 			pw.print(pdfText);
 			pw.close();
 		} catch (Exception e) {
-			System.out
-					.println("An exception occured in writing the pdf text to file.");
+			System.out.println("Exception uhvaćen prilikom upisivanja PDF teksta u datoteku.");
 			e.printStackTrace();
 		}
 		System.out.println("Gotovo.");
@@ -123,7 +122,6 @@ public class TikaEkstrakcija implements Runnable {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		TikaEkstrakcija ttt = new TikaEkstrakcija();
 		System.out.println("Unesite putanju do direktorijuma ili fajla:"
 				+ " (npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -138,17 +136,13 @@ public class TikaEkstrakcija implements Runnable {
 		System.out.println("||               METAPODACI               ||");
 		System.out.println("============================================");
 		
-		// tikaExt.run();
-
 		Thread tre = new Thread(new TikaEkstrakcija());
 		tre.start();
 		while (tre.isAlive()) {
 
 			System.out.println("Ekstraktujem ....");
 			
-			// Wait maximum of 1 second
-			// for MessageLoop thread
-			// to finish.
+			// Čekaj 4 sec. da se završi
 			tre.join(4000);
 		}
 
