@@ -1,10 +1,17 @@
 package org.lugons.libre.lucene.tika;
 
 import org.lugons.libre.lucene.rawdokumenta.RawDokumenta;
+
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.apache.tika.io.IOUtils;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
@@ -15,17 +22,15 @@ import org.xml.sax.ContentHandler;
 
 public class TikaEkstrakcija implements Runnable {
 
+	static Logger log = Logger.getLogger(TikaEkstrakcija.class.getName());
+
+	//final static String DIREKTORIJUM = "C:\\Temp\\input.txt";
+	//final static String OUTPUT_FILE_NAME = "C:\\Temp\\output.txt";
+	final static Charset ENCODING = StandardCharsets.UTF_8;
+
+	public static String text;
 	private static RawDokumenta raw;
-	private String text;
 	private Map<String, String> metaData;
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 
 	public Map<String, String> getMetaData() {
 		return metaData;
@@ -50,9 +55,11 @@ public class TikaEkstrakcija implements Runnable {
 	public void run() {
 		try {
 			for (int i = 0; i < raw.getListaFajlova().size(); i++) {
-
-				pdfParsiranje(raw.getListaFajlova().get(i).getAbsolutePath());
-				System.out.println("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
+				// System.out.println(pdfParsiranje(raw.getListaFajlova().get(i).getAbsolutePath()));
+				log.info("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
+				//System.out.println("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
+				text = raw.getListaFajlova().get(i).getName();
+				upisiParsiranTekst(raw.getListaFajlova().get(i).getName() + ".txt", pdfParsiranje(raw.getListaFajlova().get(i).getAbsolutePath()));
 			}
 
 		} catch (IOException e) {
@@ -61,32 +68,35 @@ public class TikaEkstrakcija implements Runnable {
 
 	}
 
-	private void pdfParsiranje(String putanja) throws IOException {
+	private String pdfParsiranje(String putanja) throws IOException {
 
 		InputStream is = null;
-		ContentHandler nosacSadrzaja;
+		ContentHandler nosacSadrzaja = null;
 		Metadata md;
 		AutoDetectParser parser;
 
 		try {
-			metaData = new HashMap<String, String>();
 			md = new Metadata();
 
 			is = new FileInputStream(putanja);
+
+			/**
+			 * Maksimalan broj karaktera za upis u stream. -1 za MAX
+			 */
 			nosacSadrzaja = new BodyContentHandler(-1);
 
 			parser = new AutoDetectParser();
 			parser.parse(is, nosacSadrzaja, md, new ParseContext());
 			processMetaData(md);
 			sviMetapodaci(getMetaData());
-			System.out.println(nosacSadrzaja.toString());
-
+			//log.info(nosacSadrzaja.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (is != null)
 				IOUtils.closeQuietly(is);
 		}
+		return nosacSadrzaja.toString();
 	}
 
 	public void sviMetapodaci(Map<String, String> map) {
@@ -96,24 +106,18 @@ public class TikaEkstrakcija implements Runnable {
 	}
 
 	// Upisujem parsiran PDF u tekstualni fajl
-	// TODO uraditi ovu metodu
-	void writeTexttoFile(String pdfText, String fileName) {
+	private void upisiParsiranTekst(String imeDatoteke, String parsiranTekst) throws IOException {
+		Path path = Paths.get(imeDatoteke);
+		try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)) {
 
-		System.out.println("\nUpisujem parsiran PDF u tekstualni fajl " + fileName + "....");
-		try {
-			PrintWriter pw = new PrintWriter(fileName);
-			pw.print(pdfText);
-			pw.close();
-		} catch (Exception e) {
-			System.out.println("Exception uhvaćen prilikom upisivanja PDF teksta u datoteku.");
-			e.printStackTrace();
+			writer.write(parsiranTekst);
+			writer.newLine();
+
 		}
-		System.out.println("Gotovo.");
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		System.out.println("Unesite putanju do direktorijuma ili fajla:" + 
-							" (npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)");
+		System.out.println("Unesite putanju do direktorijuma ili fajla:" + " (npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String unosKorisnika = br.readLine();
 		raw = new RawDokumenta(unosKorisnika);
@@ -129,11 +133,11 @@ public class TikaEkstrakcija implements Runnable {
 		Thread tre = new Thread(new TikaEkstrakcija());
 		tre.start();
 		while (tre.isAlive()) {
+			// Čekaj 5 sek. pa obavesti
+			tre.join(5000);
 
-			System.out.println("Ekstraktujem ....");
+			System.out.println("Ekstraktujem ...." + TikaEkstrakcija.text);
 
-			// Čekaj 4 sec. da se završi
-			tre.join(4000);
 		}
 
 		System.out.println("GOOOOTOVO");
