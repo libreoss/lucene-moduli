@@ -36,7 +36,7 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.ContentHandler;
 
 /**
- * @author Dean Chugall 
+ * @author Dean Chugall
  * @version 0.1
  * 
  *          TikaEkstrakcija klasa koja upotrebljava TIKA biblioteku i koja
@@ -145,7 +145,7 @@ public class TikaEkstrakcija implements Runnable {
 	private void upisiParsiranTekst(String imeDatoteke, String parsiranTekst) throws IOException {
 
 		// Ako se ništa ne unese upisuje se u ROOT projekta
-		//TODO obrisati ekstenziju
+		// TODO obrisati ekstenziju
 		Path putanja = Paths.get(putanjaZaEkstrakciju + imeDatoteke);
 
 		try (BufferedWriter writer = Files.newBufferedWriter(putanja, ENCODING)) {
@@ -165,7 +165,8 @@ public class TikaEkstrakcija implements Runnable {
 			for (int i = 0; i < raw.getListaFajlova().size(); i++) {
 				log.info("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
 				nadjeneDatoteke = raw.getListaFajlova().get(i).getName();
-				upisiParsiranTekst(raw.getListaFajlova().get(i).getName() + ".txt", parsiranjeDokumenata(raw.getListaFajlova().get(i).getAbsolutePath()));
+				upisiParsiranTekst(raw.getListaFajlova().get(i).getName() + ".txt", parsiranjeDokumenata(raw
+				        .getListaFajlova().get(i).getAbsolutePath()));
 			}
 
 		} catch (IOException e) {
@@ -179,7 +180,8 @@ public class TikaEkstrakcija implements Runnable {
 		System.out.println("||           TIKA EKSTRAKCIJA             ||");
 		System.out.println("============================================");
 
-		System.out.println("Unesite putanju do direktorijuma ili fajla koje " + " treba ekstraktovati: \n(npr. /tmp/Biblioteka ili C:\\temp\\Biblioteka)");
+		System.out.println("Unesite putanju do direktorijuma ili fajla koje "
+		        + " treba ekstraktovati: \n(npr. /tmp/Biblioteka ili C:\\temp\\Biblioteka)");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String unosKorisnika = br.readLine();
