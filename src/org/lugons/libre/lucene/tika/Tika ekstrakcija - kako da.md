@@ -29,7 +29,7 @@ Posle, nadamo se, uspešne ekstrakcije dobićete poruku:
 
 ##### "Datoteka ekstraktovana i upisana na lokaciji: " + vaša putanja do datoteke.
 
-Slika ispod prikazuje kako bi to trebalo da izgleda:
+Slika ispod prikazuje kako bi to trebalo da izgleda u konzolnom ispisu IDE okruženja:
 
 ![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/Modul_Tika/Nakon_ekstrakcije.png "Tika modul, kako da...")
 
