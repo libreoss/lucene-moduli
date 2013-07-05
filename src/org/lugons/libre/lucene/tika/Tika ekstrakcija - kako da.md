@@ -21,8 +21,8 @@ Nakon unosa dobićete još jedno pitanje, a to je gde želite da ekstraktovan sa
 Ovako bi to izgledalo nako unošenja parametara, a na Windows platformi:
 
 ![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/Modul_Tika/Tika-kako-da.png "Tika modul, kako da...")
-######Obavezno stavite znak "\" na kraju putanje.
-
+######Obavezno stavite znak "\" na kraju putanje za Windows korisnike, dok "/" za GNU/Linux korisnike.
+===================
 Nakon unetih traženih parametara klikom na Enter započinje se ekstrakcija. U zavisnosti od veličine prosleđenog
 dokumenta, ekstrakcija može da potraje, tako da je potrebno samo malo strpljenja.
 
@@ -36,6 +36,8 @@ Slika ispod prikazuje kako bi to trebalo da izgleda u konzolnom ispisu IDE okru�
 
 U ovom trenutku trebalo bi da odete do fascikle koju ste zadali u početnim podešavanjima i da vas čeka tekstualni fajl sa 
 ekstraktovanim sadržajem dokumenta.
+
+===================
 
 Toliko za ovaj modul, ako imate bilo kakve probleme otvorite ISSUES na adresi: https://github.com/libreoss/lucene-moduli/issues?page=1&state=open 
 ,pa ćemo pokušati da rešimo.
