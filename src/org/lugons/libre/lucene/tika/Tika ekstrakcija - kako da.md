@@ -36,4 +36,5 @@ Slika ispod prikazuje kako bi to trebalo da izgleda u konzolnom ispisu IDE okru�
 U ovom trenutku trebalo bi da odete do fascikle koju ste zadali u početnim podešavanjima i da vas čeka tekstualni fajl sa 
 ekstraktovanim sadržajem dokumenta.
 
-Toliko za ovaj modul, ako imate bilo kakve probleme otvorite ISSUES pa ćemo pokušati da rešimo.
+Toliko za ovaj modul, ako imate bilo kakve probleme otvorite ISSUES na adresi: https://github.com/libreoss/lucene-moduli/issues?page=1&state=open 
+,pa ćemo pokušati da rešimo.
