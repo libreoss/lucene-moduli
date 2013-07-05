@@ -18,6 +18,10 @@ broj časopisa, jer ekstrakciji ipak treba malo vremena pa da ne bih čekali...
 Nakon unosa dobićete još jedno pitanje, a to je gde želite da ekstraktovan sadržaj bude upisan, a pitanje glasi:
 #####"Unesite putanju do fascikle gde se upisuju ekstraktovane datoteke"
 
+Ovako bi to izgledalo nako unošenja parametara, a na Windows platformi:
+
+![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/Modul_Tika/Tika-kako-da.png "Tika modul, kako da...")
+
 Nakon unetih traženih parametara klikom na Enter započinje se ekstrakcija. U zavisnosti od veličine prosleđenog
 dokumenta, ekstrakcija može da potraje, tako da je potrebno samo malo strpljenja.
 
