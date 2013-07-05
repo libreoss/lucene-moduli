@@ -27,8 +27,13 @@ dokumenta, ekstrakcija može da potraje, tako da je potrebno samo malo strpljenj
 
 Posle, nadamo se, uspešne ekstrakcije dobićete poruku:
 
-##### "Datoteka ekstraktovana i upisana na lokaciji: " + vaša putanja do datoteke, kao [to je prikayano na slici ispod:
+##### "Datoteka ekstraktovana i upisana na lokaciji: " + vaša putanja do datoteke.
+
+Slika ispod prikazuje kako bi to trebalo da izgleda:
 
 ![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/Modul_Tika/Nakon_ekstrakcije.png "Tika modul, kako da...")
+
+U ovom trenutku trebalo bi da odete do fascikle koju ste zadali u početnim podešavanjima i da vas čeka tekstualni fajl sa 
+ekstraktovanim sadržajem dokumenta.
 
 Toliko za ovaj modul, ako imate bilo kakve probleme otvorite ISSUES pa ćemo pokušati da rešimo.
