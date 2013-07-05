@@ -185,7 +185,7 @@ public class TikaEkstrakcija implements Runnable {
 		String unosKorisnika = br.readLine();
 
 		raw = new RawDokumenta(unosKorisnika);
-		System.out.println("Unesite putanju do fascikle gde se upisuju ekstraktovane datoteke");
+		System.out.println("Unesite putanju do fascikle gde se upisuju ekstraktovane datoteke ?");
 		String unosPutanjeZaUpisTxt = br.readLine();
 		TikaEkstrakcija.putanjaZaEkstrakciju = unosPutanjeZaUpisTxt;
 
