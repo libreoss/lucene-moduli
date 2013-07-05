@@ -21,6 +21,7 @@ Nakon unosa dobićete još jedno pitanje, a to je gde želite da ekstraktovan sa
 Ovako bi to izgledalo nako unošenja parametara, a na Windows platformi:
 
 ![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/Modul_Tika/Tika-kako-da.png "Tika modul, kako da...")
+######Obavezno stavite znak "\" na kraju putanje.
 
 Nakon unetih traženih parametara klikom na Enter započinje se ekstrakcija. U zavisnosti od veličine prosleđenog
 dokumenta, ekstrakcija može da potraje, tako da je potrebno samo malo strpljenja.
