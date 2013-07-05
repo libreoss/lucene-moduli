@@ -36,13 +36,11 @@ public class TikaEkstrakcija implements Runnable {
 		return metaData;
 	}
 
-	public void setMetaData(Map<String, String> metaData) {
-		this.metaData = metaData;
-	}
+	
 
 	private void processMetaData(Metadata metadata) {
 		if ((getMetaData() == null) || (!getMetaData().isEmpty())) {
-			setMetaData(new HashMap<String, String>());
+			metaData = new HashMap<String, String>();
 		}
 		for (String name : metadata.names()) {
 			getMetaData().put(name.toLowerCase(), metadata.get(name));
@@ -59,7 +57,7 @@ public class TikaEkstrakcija implements Runnable {
 				log.info("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
 				//System.out.println("Nađeni fajl-ovi: " + raw.getListaFajlova().get(i).getName());
 				text = raw.getListaFajlova().get(i).getName();
-				upisiParsiranTekst(raw.getListaFajlova().get(i).getName() + ".txt", pdfParsiranje(raw.getListaFajlova().get(i).getAbsolutePath()));
+				upisiParsiranTekst(raw.getListaFajlova().get(i).getName() + ".txt", parsiranjeDokumenata(raw.getListaFajlova().get(i).getAbsolutePath()));
 			}
 
 		} catch (IOException e) {
@@ -68,26 +66,26 @@ public class TikaEkstrakcija implements Runnable {
 
 	}
 
-	private String pdfParsiranje(String putanja) throws IOException {
+	private String parsiranjeDokumenata(String putanja) throws IOException {
 
 		InputStream is = null;
 		ContentHandler nosacSadrzaja = null;
-		Metadata md;
+		Metadata metadata;
 		AutoDetectParser parser;
 
 		try {
-			md = new Metadata();
+			metadata = new Metadata();
 
 			is = new FileInputStream(putanja);
 
 			/**
-			 * Maksimalan broj karaktera za upis u stream. -1 za MAX
+			 * Maksimalan broj karaktera za upis u InputStream. -1 za MAX
 			 */
 			nosacSadrzaja = new BodyContentHandler(-1);
 
 			parser = new AutoDetectParser();
-			parser.parse(is, nosacSadrzaja, md, new ParseContext());
-			processMetaData(md);
+			parser.parse(is, nosacSadrzaja, metadata, new ParseContext());
+			processMetaData(metadata);
 			sviMetapodaci(getMetaData());
 			//log.info(nosacSadrzaja.toString());
 		} catch (Exception e) {
