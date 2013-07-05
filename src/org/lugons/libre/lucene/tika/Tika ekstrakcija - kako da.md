@@ -10,7 +10,7 @@ Klasa "TikaEkstrakcija", kako da...
 
 Modul se pokreće iz IDE programerskog okruženja(Eclipse), i ceo rezultat se ispisuje u konzolnom ispisu istog.
 Nakon pokretanja dobićete poruku:
-#####"Unesite putanju do direktorijuma ili fajla koje treba ekstraktovati: (npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)"
+#####"Unesite putanju do direktorijuma ili fajla koje treba ekstraktovati: (npr. /tmp/Biblioteka ili C:\\temp\\Biblioteka)"
 					
 Unosite putanju do fascikle gde vam se nalaze LiBRE! časopisi. Prvo bi trebalo da se u neku fasciklu ubaci samo jedan
 broj časopisa, jer ekstrakciji ipak treba malo vremena pa da ne bih čekali...

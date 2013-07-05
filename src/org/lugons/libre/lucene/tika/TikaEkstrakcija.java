@@ -179,7 +179,7 @@ public class TikaEkstrakcija implements Runnable {
 		System.out.println("||           TIKA EKSTRAKCIJA             ||");
 		System.out.println("============================================");
 
-		System.out.println("Unesite putanju do direktorijuma ili fajla koje " + " treba ekstraktovati: \n(npr. /tmp/Biblioteka ili c:\\temp\\Biblioteka)");
+		System.out.println("Unesite putanju do direktorijuma ili fajla koje " + " treba ekstraktovati: \n(npr. /tmp/Biblioteka ili C:\\temp\\Biblioteka)");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String unosKorisnika = br.readLine();
