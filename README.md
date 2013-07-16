@@ -25,5 +25,5 @@ Najlakši način je komandom "git clone":
 
 <code>git clone https://github.com/libreoss/lucene-moduli.git</code>
 
-i posle toga, naravno import postoje'i Java projekat u Eclipse.
+i posle toga, naravno import postojeći Java projekat u Eclipse.
 
