@@ -4,7 +4,7 @@ LiBRE! _Lucene_ - Moduli
 
  
  
-![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/LiBRE-Lucene-application-LOGO_.png "Logo Title Text 1")
+![Libre_Lucene-Moduli](http://www.deanchugall.info/LibreSlike/LiBRE-Lucene-application-LOGO_.png "Lucene Moduli")
 
 #####Kratke vesti
 
@@ -21,3 +21,9 @@ se spremamo za implementaciju klase _"TikaEkstrakcija"_, koju ćemo predstaviti 
   - Eclipse egit plugin
 
 ### Importovanje projekta u Eclipse IDE
+Najlakši način je komandom "git clone":
+
+<code>git clone https://github.com/libreoss/lucene-moduli.git</code>
+
+i posle toga, naravno import postoje'i Java projekat u Eclipse.
+
