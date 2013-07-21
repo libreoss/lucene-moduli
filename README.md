@@ -20,6 +20,8 @@ se spremamo za implementaciju klase _"TikaEkstrakcija"_, koju ćemo predstaviti 
   - Eclipse
   - Eclipse egit plugin
   - Sun Java SE 7 JDK
+  
+  
 ### Importovanje projekta u Eclipse IDE
 Najlakši način je komandom "git clone":
 
